@@ -1,11 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import {
-  createTheme,
-  fontWeight,
-  ThemeProvider,
-  typography,
-} from "@mui/system";
+
+import { createTheme, ThemeProvider } from "@mui/material";
 import { purple } from "@mui/material/colors";
+
+import Create from "./pages/Create";
 
 const theme = createTheme({
   palette: {
@@ -25,7 +23,9 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Router>
-        <Routes></Routes>
+        <Routes>
+          <Route path="/create" element={<Create />} />
+        </Routes>
       </Router>
     </ThemeProvider>
   );
