@@ -19,8 +19,8 @@ import { URL } from "../config";
 
 const classes = {
   field: {
-    marginTop: 20,
-    marginBottom: 20,
+    "margin-top": 20,
+    "margin-bottom": 20,
     display: "block",
   },
 };
