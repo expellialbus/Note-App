@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import {
   Button,
@@ -14,9 +15,7 @@ import {
 import { Box } from "@mui/system";
 import { KeyboardArrowRight } from "@mui/icons-material";
 
-const handleSubmit = (e) => {
-  e.preventDefault();
-};
+import { URL } from "../config";
 
 const classes = {
   field: {
@@ -27,11 +26,44 @@ const classes = {
 };
 
 const Create = () => {
+  const navigate = useNavigate();
+
   const [title, setTitle] = useState("");
   const [details, setDetails] = useState("");
-  const [category, setCategory] = useState("todos");
+  const [category, setCategory] = useState("todo");
   const [titleError, setTitleError] = useState(false);
   const [detailsError, setDetailsError] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    setTitleError(false);
+    setDetailsError(false);
+
+    if (title.trim() == "") {
+      setTitleError(true);
+    }
+
+    if (details.trim() == "") {
+      setDetailsError(true);
+    }
+
+    if (title && details) {
+      fetch(URL, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          title,
+          details,
+          category,
+        }),
+      })
+        .then(() => navigate("/"))
+        .catch((error) => console.log(error));
+    }
+  };
 
   return (
     <Container>
@@ -71,14 +103,14 @@ const Create = () => {
             onChange={(e) => setCategory(e.target.value)}
           >
             <FormControlLabel
-              label="Todos"
+              label="Todo"
               control={<Radio color="secondary" />}
-              value="todos"
+              value="todo"
             />
             <FormControlLabel
-              label="Reminders"
+              label="Reminder"
               control={<Radio color="secondary" />}
-              value="reminders"
+              value="reminder"
             />
             <FormControlLabel
               label="Work"
@@ -86,9 +118,9 @@ const Create = () => {
               value="work"
             />
             <FormControlLabel
-              label="Meetings"
+              label="Meeting"
               control={<Radio color="secondary" />}
-              value="meetings"
+              value="meeting"
             />
           </RadioGroup>
         </FormControl>
