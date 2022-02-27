@@ -82,7 +82,7 @@ const Create = () => {
           color="secondary"
           fullWidth
           required
-          style={classes.field}
+          sx={classes.field}
           error={titleError}
         />
         <TextField
@@ -93,10 +93,10 @@ const Create = () => {
           rows={4}
           fullWidth
           required
-          sytle={classes.field}
+          sx={classes.field}
           error={detailsError}
         />
-        <FormControl style={classes.field}>
+        <FormControl sx={classes.field}>
           <FormLabel>Note Category</FormLabel>
           <RadioGroup
             value={category}
