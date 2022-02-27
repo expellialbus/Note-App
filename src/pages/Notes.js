@@ -18,12 +18,22 @@ const Notes = () => {
     []
   );
 
+  const handleDelete = async (id) => {
+    await fetch(`${URL}/${id}`, {
+      method: "DELETE",
+    });
+
+    const remainNotes = notes.filter((note) => note.id != id);
+
+    setNotes(remainNotes);
+  };
+
   return (
     <Container>
       <Masonry columns={{ xs: 1, md: 2, lg: 4 }} spacing={3}>
         {notes.map((note) => (
           <Box key={note.id}>
-            <NoteCard note={note} />
+            <NoteCard note={note} handleDelete={handleDelete} />
           </Box>
         ))}
       </Masonry>

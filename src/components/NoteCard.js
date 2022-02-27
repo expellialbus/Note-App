@@ -43,7 +43,7 @@ const styles = (note) => ({
   },
 });
 
-const NoteCard = ({ note }) => {
+const NoteCard = ({ note, handleDelete }) => {
   const classes = styles(note);
 
   return (
@@ -56,7 +56,10 @@ const NoteCard = ({ note }) => {
             </Avatar>
           }
           action={
-            <IconButton sx={classes.button}>
+            <IconButton
+              onClick={() => handleDelete(note.id)}
+              sx={classes.button}
+            >
               <DeleteOutlined />
             </IconButton>
           }
