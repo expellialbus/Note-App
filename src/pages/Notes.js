@@ -15,7 +15,7 @@ const Notes = () => {
         .then((response) => response.json())
         .then((data) => setNotes(data))
         .catch((error) => console.log(error)),
-    []
+    [notes]
   );
 
   const handleDelete = async (id) => {

@@ -1,6 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-import { DeleteOutlined } from "@mui/icons-material";
+import {
+  BeenhereOutlined,
+  DeleteOutlined,
+  ModeEditOutlined,
+} from "@mui/icons-material";
 import { Button } from "@mui/material";
 import {
   Avatar,
@@ -15,7 +19,8 @@ import { Collapse } from "@mui/material";
 import { pink, yellow, blue, green, grey } from "@mui/material/colors";
 import { Box } from "@mui/material";
 
-import Create from "../pages/Create";
+import EditCard from "./EditCard";
+import { URL } from "../config";
 
 const getColor = (category) => {
   switch (category) {
@@ -53,9 +58,46 @@ const styles = (note) => ({
 const NoteCard = ({ note, handleDelete }) => {
   const classes = styles(note);
 
+  const [title, setTitle] = useState(note.title);
+  const [details, setDetails] = useState(note.details);
+  const [category, setCategory] = useState(note.category);
+  const [titleError, setTitleError] = useState(false);
+  const [detailsError, setDetailsError] = useState(false);
+
   const [expanded, setExpanded] = useState(false);
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
+
+  useEffect(() => {
+    setTitleError(false);
+    setDetailsError(false);
+
+    if (title.trim() == "") {
+      setTitleError(true);
+    }
+
+    if (details.trim() == "") {
+      setDetailsError(true);
+    }
+  }, [title, details]);
+
+  const handleSave = () => {
+    if (!titleError && !detailsError) {
+      setExpanded(!expanded);
+
+      fetch(`${URL}/${note.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          title,
+          details,
+          category,
+        }),
+      })
+        .then((response) => response.json())
+        .then((json) => console.log(json))
+        .catch((error) => console.log(error));
+    }
   };
 
   return (
@@ -92,14 +134,23 @@ const NoteCard = ({ note, handleDelete }) => {
                 duration: theme.transitions.duration.shortest,
               }),
             })}
-            onClick={handleExpandClick}
+            onClick={handleSave}
+            endIcon={expanded ? <BeenhereOutlined /> : <ModeEditOutlined />}
           >
-            {expanded ? "Submit" : "Edit"}
+            {expanded ? "Save" : "Edit"}
           </Button>
         </CardActions>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent>
-            <Create />
+            <EditCard
+              note={note}
+              category={category}
+              setTitle={setTitle}
+              setDetails={setDetails}
+              setCategory={setCategory}
+              titleError={titleError}
+              detailsError={detailsError}
+            />
           </CardContent>
         </Collapse>
       </Card>
