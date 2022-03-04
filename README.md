@@ -32,23 +32,21 @@ As its name suggests, this is a note keeping app. It basically allows you to add
 
 <details>
     <summary><a href="https://github.com/recep-yildirim/Note-App/tree/master/screenshots">App's user interfaces</a></summary>
-    <ul style="list-style-type:none;">
-      <li>
-        <details>
-            <summary>Notes Page</summary>
-            <img alt="Notes Page" src="https://github.com/recep-yildirim/Note-App/blob/master/screenshots/notes.png">
-        </details>
-        <details>
-            <summary>Create Note Page</summary>
-            <img alt="Create Note Page" src="https://github.com/recep-yildirim/Note-App/blob/master/screenshots/create.png">
-        </details>  
-         <details>
-            <summary>Edit Note Card</summary>
-            <img alt="Edit Note Card" src="https://github.com/recep-yildirim/Note-App/blob/master/screenshots/edit.png">
-        </details>       
-      </li>
     <ul>
-</details><br />
+      <details>
+        <summary>Notes Page</summary>
+        <img alt="Notes Page" src="https://github.com/recep-yildirim/Note-App/blob/master/screenshots/notes.png">
+      </details>
+      <details>
+        <summary>Create Note Page</summary>
+        <img alt="Create Note Page" src="https://github.com/recep-yildirim/Note-App/blob/master/screenshots/create.png">
+      </details>  
+      <details>
+        <summary>Edit Note Card</summary>
+        <img alt="Edit Note Card" src="https://github.com/recep-yildirim/Note-App/blob/master/screenshots/edit.png">
+      </details>       
+    <ul>
+</details>
 
 ## Learn More
 
